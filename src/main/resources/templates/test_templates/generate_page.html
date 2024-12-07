@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입고 생성</title>
+    <style>
+        /* 전체 페이지 스타일 - 다크 모드 */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1e1e1e; /* 다크 배경색 */
+            color: #f1f1f1; /* 텍스트 색상 */
+        }
+
+        /* 컨테이너 스타일 */
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            background-color: #2e2e2e; /* 다크 컨테이너 배경색 */
+            width: 300px;
+        }
+
+        /* 제목 스타일 */
+        .container h1 {
+            color: #4CAF50; /* 초록색 제목 */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* 버튼 스타일 */
+        .button {
+            background-color: #4CAF50; /* 초록색 버튼 */
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* 버튼 호버 스타일 */
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Generator</h1>
+    <button id="generate_receiving" class="button">입고 생성</button>
+    <div id="response_div"></div>
+</div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $(() => {
+        onclickGenerateReceiving()
+    })
+
+    function onclickGenerateReceiving() {
+        $('#generate_receiving').click(() => {
+            $.ajax({
+                url: "/gen/receiving",
+                type: "POST"
+            }).done(function (data) {
+                $('#response_div').html(data);
+            })
+        })
+    }
+</script>
+
+</html>
